@@ -29,7 +29,7 @@ class _loginPageState extends State<loginPage> {
                   const SizedBox(
                     height: 25,
                   ),
-                  //                     TODO:EMAIL FIELD
+                  //                  TODO:LOGIN CONTAINER
                   Container(
                     margin: const EdgeInsets.all(20.0),
                     padding: const EdgeInsets.all(3.0),
@@ -47,6 +47,9 @@ class _loginPageState extends State<loginPage> {
                           ),
                         ),
                         const SizedBox(height: 50),
+
+                                           // TODO:EMAIL FIELD
+
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30.0),
                           child: Container(
