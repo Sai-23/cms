@@ -30,7 +30,6 @@ class add_MongoDBModel {
     required this.schoolOrCollegeName,
     required this.classOrTuitionName,
   });
-
   ObjectId id;
   String firstName;
   String middleName;
