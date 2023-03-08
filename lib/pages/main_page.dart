@@ -4,6 +4,7 @@ import 'package:cms/constants.dart';
 import 'Sections/Admission/admissionSection.dart';
 import 'Sections/Fees/feesSection.dart';
 import 'Sections/Lecture/lectureSection.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class mainPage extends StatefulWidget {
   const mainPage({super.key});
