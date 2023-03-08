@@ -41,7 +41,7 @@ class _loginPageState extends State<loginPage> {
                       children: [
                         const SizedBox(height: 20,),
                          Text(
-                          'LOGIN PAGE',
+                          'LOGIN PAGE ',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w800,fontSize: 30,fontStyle: FontStyle.italic
                           ),
@@ -103,12 +103,12 @@ class _loginPageState extends State<loginPage> {
                             });
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(30),
+                            padding: const EdgeInsets.only(left: 50,right: 50,top: 20,bottom: 40),
                             child: Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                   color: Colors.green[700],
-                                  borderRadius: BorderRadius.circular(15)),
+                                  borderRadius: BorderRadius.circular(12)),
                               child:  Center(
                                 child: Text(
                                   'Sign In',
