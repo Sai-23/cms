@@ -37,7 +37,7 @@ class _studentSectionState extends State<studentSection> {
               onPressed: () {},
               child: Icon(Icons.search),
               style: ButtonStyle(
-                backgroundColor:MaterialStateProperty.all(Color(0xFF498757)),
+                backgroundColor:MaterialStateProperty.all(const Color(0xFF498757)),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
