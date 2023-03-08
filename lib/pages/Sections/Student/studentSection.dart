@@ -35,7 +35,6 @@ class _studentSectionState extends State<studentSection> {
             //                 TODO:SEARCH BUTTON
             ElevatedButton(
               onPressed: () {},
-              child: Icon(Icons.search),
               style: ButtonStyle(
                 backgroundColor:MaterialStateProperty.all(const Color(0xFF498757)),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -45,6 +44,7 @@ class _studentSectionState extends State<studentSection> {
                   )
                 )
               ),
+              child: Icon(Icons.search),
 
             ),
             const SizedBox(
