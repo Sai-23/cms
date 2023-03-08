@@ -1,5 +1,6 @@
 import 'package:cms/dbHelper/mongodb.dart';
 import 'package:cms/pages/Sections/Student/Add/add_Student.dart';
+import 'package:cms/pages/Sections/Student/Display/display_student.dart';
 import 'package:flutter/material.dart';
 import 'package:cms/pages/loginPage.dart';
 import 'package:cms/pages/main_page.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const loginPage(),
         '/mainPage': (context) => const mainPage(),
-        '/addStudent': (context) => const addStudent()
+        '/addStudent': (context) => const addStudent(),
+        '/displayStudent':(context)=>const DisplayStudent()
       },
     );
   }

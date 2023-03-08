@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:mongo_dart/mongo_dart.dart';
 import 'constant.dart';
 import 'package:cms/pages/Sections/Student/Add/add_MongoDBModel.dart';
@@ -10,7 +10,7 @@ class MongoDatabase {
     await db.open();
     userCollection = db.collection(USER_COLLECTION);
   }
-
+  //                          TODO:INSERT FUNCTION
   static Future<String> insert(add_MongoDBModel data) async {
     try {
       var result = await userCollection.insertOne(data.toJson());
@@ -19,9 +19,13 @@ class MongoDatabase {
       } else {
         return "Something's Wrong";
       }
-      return result;
     } catch (e) {
       return e.toString();
     }
   }
+  //                          TODO:DISPLAY FUNCTION
+static Future<List<Map<String,dynamic>>> getData()async{
+    final arrData = await userCollection.find().toList();
+    return arrData;
+}
 }
