@@ -42,7 +42,7 @@ class _mainPageState extends State<mainPage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            label: 'Students',
+            label: 'Studentss',
             backgroundColor: kBackgroundNavigationTabColor,
           ),
           BottomNavigationBarItem(
