@@ -35,7 +35,7 @@ class _studentSectionState extends State<studentSection> {
                       )),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               //                 TODO:SEARCH BUTTON

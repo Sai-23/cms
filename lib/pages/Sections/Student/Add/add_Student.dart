@@ -31,16 +31,18 @@ class _addStudentState extends State<addStudent> {
         currentStep++;
       });
     } else {
-      QuickAlert.show(
-          context: context,
-          type: QuickAlertType.success,
-          text: "Student Created Successfully",
-          onConfirmBtnTap: () {
-            Navigator.pop(context);
-            Navigator.pop(context);
-          });
+       QuickAlert.show(
+           context: context,
+           type: QuickAlertType.success,
+           text: "Student Created Successfully",
+           onConfirmBtnTap: () {
+             Navigator.pop(context);
+             Navigator.pop(context);
+           });
 
-      //               TODO:Update the data to the server
+
+
+
 
 
         //                  TODO:INSERT THE DATA TO THE SERVER
@@ -219,12 +221,12 @@ class _addStudentState extends State<addStudent> {
           state: currentStep > 0 ? StepState.complete : StepState.disabled,
           title: const Text("PERSONAL DETAILS"),
           content: Form(
+            autovalidateMode: AutovalidateMode.always,
             key: formKey,
             child: Column(
               children: [
                 TextFormField(
                   controller: fNameController,
-                  validator: (value) {},
                   decoration: InputDecoration(
                       label: Text("First Name"), border: roundBorder()),
                 ),
@@ -411,7 +413,12 @@ class _addStudentState extends State<addStudent> {
         ),
       ];
 
+
+  // TextFormField Functions
+
   OutlineInputBorder roundBorder() {
-    return OutlineInputBorder(borderRadius: BorderRadius.circular(20));
+    return
+      OutlineInputBorder(borderRadius: BorderRadius.circular(20));
   }
+
 }
