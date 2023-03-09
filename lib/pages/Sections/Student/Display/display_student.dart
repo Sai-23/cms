@@ -3,6 +3,7 @@ import 'package:cms/pages/Sections/Student/Add/add_MongoDBModel.dart';
 import 'package:cms/pages/Sections/Student/Add/add_Student.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quickalert/quickalert.dart';
 
 class DisplayStudent extends StatefulWidget {
   const DisplayStudent({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _DisplayStudentState extends State<DisplayStudent> {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: FutureBuilder(
             future: MongoDatabase.getData(),
             builder: (context, AsyncSnapshot snapshot) {
@@ -73,18 +74,39 @@ class _DisplayStudentState extends State<DisplayStudent> {
                 Text("DOB= ${data.date}"),
               ],
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (BuildContext) {
-                    return addStudent();
+            Column(
+              children: [
+                IconButton(
+                  onPressed: (){
+                   // TODO:DELETE FUNCTION GOES HERE
+                    QuickAlert.show(
+                      context: context,
+                      type: QuickAlertType.confirm,
+                      animType: QuickAlertAnimType.slideInDown,
+                      title: "DELETE STUDENT",
+                      text: 'Are You Sure?',
+                      confirmBtnText: 'Delete',
+                      cancelBtnText: 'Cancel',
+                      confirmBtnColor: Colors.red,
+                      onConfirmBtnTap: ()async{
+                        await MongoDatabase.delete(data);
+                        Navigator.pop(context);
+                        setState(() {
+
+                        });
+                      }
+                    );
+
+
                   },
-                    settings: RouteSettings(arguments: data)
-                  ),
-                );
-              },
-              icon: Icon(Icons.edit),
+                  icon: Icon(Icons.delete,color: Colors.red,),
+                ), IconButton(
+                  onPressed: () {
+                   // TODO:UPDATE FUNCTION COMES HERE
+                  },
+                  icon: Icon(Icons.edit),
+                ),
+              ],
             )
           ],
         ),

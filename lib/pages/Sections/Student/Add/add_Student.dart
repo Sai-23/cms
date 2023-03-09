@@ -34,7 +34,7 @@ class _addStudentState extends State<addStudent> {
       QuickAlert.show(
           context: context,
           type: QuickAlertType.success,
-          text: _checkInsertUpdate,
+          text: "Student Created Successfully",
           onConfirmBtnTap: () {
             Navigator.pop(context);
             Navigator.pop(context);
@@ -42,30 +42,7 @@ class _addStudentState extends State<addStudent> {
 
       //               TODO:Update the data to the server
 
-      if (_checkInsertUpdate == "Student Updated Successfully!") {
-        _updateData(
-          m.ObjectId,
-          fNameController.text,
-          mNameController.text,
-          lNameController.text,
-          dateController.text,
-          dropdownValue,
-          aadharController.text,
-          religionController.text,
-          casteController.text,
-          fOccupationController.text,
-          motherNameController.text,
-          motherTongueController.text,
-          sPhone1Controller.text,
-          sPhone2Controller.text,
-          pPhoneController.text,
-          sEmailController.text,
-          addressController.text,
-          qualificationController.text,
-          scNameController.text,
-          ctNameController.text,
-            );
-      } else {
+
         //                  TODO:INSERT THE DATA TO THE SERVER
         _insertdata(
           fNameController.text,
@@ -88,7 +65,7 @@ class _addStudentState extends State<addStudent> {
           scNameController.text,
           ctNameController.text,
         );
-      }
+
     }
   }
 
@@ -106,34 +83,10 @@ class _addStudentState extends State<addStudent> {
     setState(() => currentStep = step);
   }
 
-  var _checkInsertUpdate = "Student Created Successfully!";
 
   @override
   Widget build(BuildContext context) {
-    add_MongoDBModel data =
-        ModalRoute.of(context)!.settings.arguments as add_MongoDBModel;
-    if (data != null) {
-      fNameController.text = data.firstName;
-      mNameController.text = data.middleName;
-      lNameController.text = data.lastName;
-      dateController.text = data.date;
-      dropdownValue = dropdownValue;
-      aadharController.text = data.aadhar;
-      religionController.text = data.religion;
-      casteController.text = data.caste;
-      fOccupationController.text = data.fatherOccupation;
-      motherNameController.text = data.motherName;
-      motherTongueController.text = data.motherTongue;
-      sPhone1Controller.text = data.studentPhone1;
-      sPhone2Controller.text = data.studentPhone2;
-      pPhoneController.text = data.parentPhone;
-      sEmailController.text = data.studentEmail;
-      addressController.text = data.address;
-      qualificationController.text = data.qualification;
-      scNameController.text = data.schoolOrCollegeName;
-      ctNameController.text = data.classOrTuitionName;
-      _checkInsertUpdate = "Student Updated Successfully!";
-    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("SmartByte"),
@@ -186,52 +139,6 @@ class _addStudentState extends State<addStudent> {
         ),
       ),
     );
-  }
-                  //   FUNCTION FOR UPDATING THE STUDENT
-  Future<void> _updateData(
-    var id,
-    String firstname,
-    String middleName,
-    String lastName,
-    String date,
-    String gender,
-    String aadhar,
-    String religion,
-    String caste,
-    String fatherOccupation,
-    String motherName,
-    String motherTongue,
-    String studentPhone1,
-    String studentPhone2,
-    String parentPhone,
-    String studentEmail,
-    String address,
-    String qualification,
-    String SchoolOrCollegeName,
-    String ClassOrTuitionName,
-  ) async {
-    final updateData = add_MongoDBModel(
-        id: id,
-        firstName: firstname,
-        middleName: middleName,
-        lastName: lastName,
-        date: date,
-        gender: gender,
-        aadhar: aadhar,
-        religion: religion,
-        caste: caste,
-        fatherOccupation: fatherOccupation,
-        motherName: motherName,
-        motherTongue: motherTongue,
-        studentPhone1: studentPhone1,
-        studentPhone2: studentPhone2,
-        parentPhone: parentPhone,
-        studentEmail: studentEmail,
-        address: address,
-        qualification: qualification,
-        schoolOrCollegeName: SchoolOrCollegeName,
-        classOrTuitionName: ClassOrTuitionName);
-         await MongoDatabase.update(updateData).whenComplete(() => Navigator.pop(context));
   }
 
   //            FUNCTION FOR INSERTING DATA INTO THE DATABASE

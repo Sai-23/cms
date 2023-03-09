@@ -88,56 +88,36 @@ class _studentSectionState extends State<studentSection> {
                       ),
                     ),
                   ),
-                  Container(
-                    width: 150,
-                    height: 135,
-                    decoration: BoxDecoration(
-                        color: const Color(0xffa1c2a0),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Icon(
-                          Icons.delete_forever_rounded,
-                          size: 50,
-                          color: Color(0xFF036000),
-                        ),
-                        Text(
-                          'Delete Student',
-                          style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18),
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/displayStudent');
+                    },
+                    child: Container(
+                      width: 150,
+                      height: 135,
+                      decoration: BoxDecoration(
+                          color: const Color(0xffa1c2a0),
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: const [
+                          Icon(
+                            Icons.people_alt_outlined,
+                            size: 50,
+                            color: Color(0xFF036000),
+                          ),
+                          Text(
+                            'All Students',
+                            style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18),
+                          )
+                        ],
+                      ),
                     ),
                   ),
+
                 ],
               ),
-              SizedBox(height: 40,),
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushNamed(context, '/displayStudent');
-                },
-                child: Container(
-                  width: 150,
-                  height: 135,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffa1c2a0),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      Icon(
-                        Icons.people_alt_outlined,
-                        size: 50,
-                        color: Color(0xFF036000),
-                      ),
-                      Text(
-                        'All Students',
-                        style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+
 
             ],
           ),
