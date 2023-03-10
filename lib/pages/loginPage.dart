@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quickalert/quickalert.dart';
 
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
@@ -12,6 +13,8 @@ class loginPage extends StatefulWidget {
 class _loginPageState extends State<loginPage> {
   var _isHiddenPassword = true; // For making password visible and invisible
   final loginFormKey = GlobalKey<FormState>();
+  var loginEmail = TextEditingController();
+  var loginPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +68,7 @@ class _loginPageState extends State<loginPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 5.0),
                               child: TextFormField(
+                                controller: loginEmail,
                                 decoration:  InputDecoration(
 
                                     prefixIcon: const Icon(Icons.mail),
@@ -97,6 +101,7 @@ class _loginPageState extends State<loginPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 5.0),
                               child: TextFormField(
+                                controller: loginPassword,
                                 obscureText: _isHiddenPassword,
                                 decoration: InputDecoration(
                                     prefixIcon: const Icon(Icons.key),
@@ -127,7 +132,19 @@ class _loginPageState extends State<loginPage> {
                             onTap: () {
                               final isValidForm = loginFormKey.currentState!.validate();
                               if(isValidForm){
-                                Navigator.pushNamed(context, '/mainPage');
+                                if(loginEmail.text=="aaa@gmail.com"&&loginPassword.text=="aaa123"){
+                                  Navigator.pushNamed(context, '/mainPage');
+                                }
+                                else{
+                                  QuickAlert.show(
+                                    context: context,
+                                    animType: QuickAlertAnimType.slideInUp,
+                                    type: QuickAlertType.error,
+                                    title: 'INVALID CREDENTIALS',
+                                    text: 'Enter Correct Credentials',
+                                  );
+                                }
+
                               }
                             },
                             child: Padding(
