@@ -29,19 +29,17 @@ class _addStudentState extends State<addStudent> {
     if (currentStep < getSteps().length - 1) {
       setState(() {
         currentStep++;
+
       });
     } else {
-       QuickAlert.show(
-           context: context,
-           type: QuickAlertType.success,
-           text: "Student Created Successfully",
-           onConfirmBtnTap: () {
-             Navigator.pop(context);
-             Navigator.pop(context);
-           });
-
-
-
+      QuickAlert.show(
+          context: context,
+          type: QuickAlertType.success,
+          text: "Student Created Successfully",
+          onConfirmBtnTap: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+          });
 
 
 
@@ -417,8 +415,7 @@ class _addStudentState extends State<addStudent> {
   // TextFormField Functions
 
   OutlineInputBorder roundBorder() {
-    return
-      OutlineInputBorder(borderRadius: BorderRadius.circular(20));
+    return OutlineInputBorder(borderRadius: BorderRadius.circular(20));
   }
 
 }
