@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quickalert/quickalert.dart';
 
 class loginPage extends StatefulWidget {
-  const loginPage({Key? key}) : super(key: key);
+  const loginPage({Key? key}) : super(key: key);  
 
   @override
   State<loginPage> createState() => _loginPageState();
@@ -34,7 +34,10 @@ class _loginPageState extends State<loginPage> {
                   const SizedBox(
                     height: 25,
                   ),
+
+
                   //                  TODO:LOGIN CONTAINER
+
                   Container(
                     margin: const EdgeInsets.all(15.0),
                     padding: const EdgeInsets.all(3.0),
@@ -56,10 +59,13 @@ class _loginPageState extends State<loginPage> {
                            Text(
                             'LOGIN PAGE ',
                             style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w800,fontSize: 30,fontStyle: FontStyle.italic
+                              fontWeight: FontWeight.w800,
+                                fontSize: 30,
+                                fontStyle: FontStyle.italic
                             ),
                           ),
                           const SizedBox(height: 40),
+
 
                                              // TODO:EMAIL FIELD
 
@@ -111,7 +117,8 @@ class _loginPageState extends State<loginPage> {
                                             _isHiddenPassword = !_isHiddenPassword;
                                           });
                                         },
-                                        child: const Icon(Icons.visibility)),
+                                        child: const Icon(Icons.visibility),
+                                    ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20)
                                     ),
@@ -127,7 +134,9 @@ class _loginPageState extends State<loginPage> {
                               ),
                             ),
                           ),
+
                                           // TODO: SIGN-IN BUTTON
+
                           GestureDetector(
                             onTap: () {
                               final isValidForm = loginFormKey.currentState!.validate();
