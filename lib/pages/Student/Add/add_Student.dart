@@ -250,7 +250,7 @@ class _addStudentState extends State<addStudent> {
                     decoration: InputDecoration(
                         border: roundBorder(),
                         prefixIcon: const Icon(Icons.calendar_month_rounded),
-                        labelText: "Date Of Birth"),
+                        labelText: "DOB"),
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(
                           context: context,
@@ -260,7 +260,7 @@ class _addStudentState extends State<addStudent> {
                       if (pickedDate != null) {
                         setState(() {
                           dateController.text =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                              DateFormat('dd-MM-yyyy').format(pickedDate);
                         });
                       }
                     },
