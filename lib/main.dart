@@ -1,6 +1,6 @@
 import 'package:cms/dbHelper/mongodb.dart';
-import 'package:cms/pages/Sections/Student/Add/add_Student.dart';
-import 'package:cms/pages/Sections/Student/Display/display_student.dart';
+import 'package:cms/pages/Student/Add/add_Student.dart';
+import 'package:cms/pages/Student/Display/display_student.dart';
 import 'package:cms/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cms/pages/loginPage.dart';

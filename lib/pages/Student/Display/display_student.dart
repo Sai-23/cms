@@ -1,6 +1,5 @@
 import 'package:cms/dbHelper/mongodb.dart';
-import 'package:cms/pages/Sections/Student/Add/add_MongoDBModel.dart';
-import 'package:cms/pages/Sections/Student/Add/add_Student.dart';
+import 'package:cms/pages/Student/Add/add_MongoDBModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
@@ -24,13 +23,11 @@ class _DisplayStudentState extends State<DisplayStudent> {
             future: MongoDatabase.getData(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
                 if (snapshot.hasData) {
-                  var totalData = snapshot.data.length;
-                  print(totalData.toString());
                   return ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
@@ -38,7 +35,7 @@ class _DisplayStudentState extends State<DisplayStudent> {
                             add_MongoDBModel.fromJson(snapshot.data[index]));
                       });
                 } else {
-                  return Center(
+                  return const Center(
                     child: Text("No Data Available"),
                   );
                 }
@@ -99,12 +96,12 @@ class _DisplayStudentState extends State<DisplayStudent> {
 
 
                   },
-                  icon: Icon(Icons.delete,color: Colors.red,),
+                  icon: const Icon(Icons.delete,color: Colors.red,),
                 ), IconButton(
                   onPressed: () {
                    // TODO:UPDATE FUNCTION COMES HERE
                   },
-                  icon: Icon(Icons.edit),
+                  icon: const Icon(Icons.edit),
                 ),
               ],
             )

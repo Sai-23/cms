@@ -1,9 +1,9 @@
-import 'package:cms/pages/Sections/Student/studentSection.dart';
+import 'package:cms/pages/Student/studentSection.dart';
 import 'package:flutter/material.dart';
 import 'package:cms/constants.dart';
-import 'Sections/Admission/admissionSection.dart';
-import 'Sections/Fees/feesSection.dart';
-import 'Sections/Lecture/lectureSection.dart';
+import 'Admission/admissionSection.dart';
+import 'Fees/feesSection.dart';
+import 'Lecture/lectureSection.dart';
 
 class mainPage extends StatefulWidget {
   const mainPage({super.key});
@@ -26,6 +26,7 @@ class _mainPageState extends State<mainPage> {
       style: optionStyle,
     )
   ];
+
   void _kOnItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
