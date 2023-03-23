@@ -1,3 +1,4 @@
+import 'package:cms/dbHelper/mongodb.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as m;
 import 'add_MongoDBModel.dart';
@@ -19,31 +20,26 @@ class _addStudentState extends State<addStudent> {
   final formKey = GlobalKey<FormState>();
   String dropdownValue = list.first;
 
-
   //                       TODO:STEPPER FUNCTIONS
   int currentStep = 0;
 
   //                      WHEN USER CLICK ON NEXT BUTTON
 
   void onStepContinue() {
-    final isValidForm =  formKey.currentState!.validate();
+    final isValid  = formKey.currentState!.validate();
     if (currentStep < getSteps().length - 1) {
       setState(() {
         currentStep++;
-
       });
     } else {
-      if(isValidForm){
+      if(isValid){
         QuickAlert.show(
             context: context,
             type: QuickAlertType.success,
             text: "Student Created Successfully",
             onConfirmBtnTap: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/mainPage');
             });
-
-
 
         //                  TODO:INSERT THE DATA TO THE SERVER
         _insertdata(
@@ -70,10 +66,10 @@ class _addStudentState extends State<addStudent> {
       }
       else{
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Please Fill All The REQUIRED Fields'),
+          content: Text('Please Fill All The Required Fields'),
         ));
-      }
 
+      }
 
     }
   }
@@ -89,14 +85,11 @@ class _addStudentState extends State<addStudent> {
 
 //                       WHEN USER TAP DIRECTLY ON DESIRED STEPPER
   tapped(int step) {
-
     setState(() => currentStep = step);
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("SmartByte"),
@@ -114,7 +107,8 @@ class _addStudentState extends State<addStudent> {
             key: formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Stepper(
-                controlsBuilder: (BuildContext context, ControlsDetails details) {
+                controlsBuilder:
+                    (BuildContext context, ControlsDetails details) {
                   return Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Row(
@@ -200,8 +194,10 @@ class _addStudentState extends State<addStudent> {
         qualification: qualification,
         schoolOrCollegeName: SchoolOrCollegeName,
         classOrTuitionName: ClassOrTuitionName);
+    var result = await MongoDatabase.insert(data);
     _clearAll();
   }
+
 //                 CLEARING THE INPUT FIELDS AFTER USER CLICKS SUBMIT
 
   void _clearAll() {
@@ -233,9 +229,9 @@ class _addStudentState extends State<addStudent> {
           title: const Text("PERSONAL DETAILS"),
           content: Column(
             children: [
-              alphabetField('First Name',fNameController),
-              alphabetField('Middle Name',mNameController),
-              alphabetField('Last Name',lNameController),
+              alphabetField('First Name', fNameController),
+              alphabetField('Middle Name', mNameController),
+              alphabetField('Last Name', lNameController),
               const SizedBox(
                 height: 8,
               ),
@@ -243,10 +239,15 @@ class _addStudentState extends State<addStudent> {
                 children: [
                   Expanded(
                       child: TextFormField(
-                        keyboardType: TextInputType.none,
-                        controller: dateController,
-                        validator: emptyFieldValidator,
-                        decoration: InputDecoration(
+                    keyboardType: TextInputType.none,
+                    controller: dateController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "*Required";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
                         border: roundBorder(),
                         prefixIcon: const Icon(Icons.calendar_month_rounded),
                         labelText: "DOB"),
@@ -259,7 +260,7 @@ class _addStudentState extends State<addStudent> {
                       if (pickedDate != null) {
                         setState(() {
                           dateController.text =
-                              DateFormat('dd-MM-yyyy').format(pickedDate);
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
                         });
                       }
                     },
@@ -269,10 +270,9 @@ class _addStudentState extends State<addStudent> {
                   ),
                   Expanded(
                       child: DropdownButtonFormField(
-                        validator:emptyFieldValidator,
-                        decoration: InputDecoration(
-                          labelText: "Select Gender",
-                          border: roundBorder()
+                        validator: emptyFieldValidator,
+                        decoration: const InputDecoration(
+                          labelText: 'Select Gender'
                         ),
                     value: dropdownValue,
                     onChanged: (String? value) {
@@ -293,10 +293,9 @@ class _addStudentState extends State<addStudent> {
               const SizedBox(
                 height: 8,
               ),
-              numericField('Aadhaar Card Number',aadharController),
-              alphabetField('Religion',religionController),
-              alphabetField('Caste',casteController),
-
+              numericField('Aadhaar Card Number', aadharController),
+              alphabetField('Religion', religionController),
+              alphabetField('Caste', casteController),
               const SizedBox(
                 height: 10,
               )
@@ -310,9 +309,9 @@ class _addStudentState extends State<addStudent> {
           title: const Text("FAMILY DETAILS"),
           content: Column(
             children: [
-              alphabetField("Father's Occupation",fOccupationController),
-              alphabetField("Mother's Name",motherNameController),
-              alphabetField('Mother Tongue',motherTongueController),
+              alphabetField("Father's Occupation", fOccupationController),
+              alphabetField("Mother's Name", motherNameController),
+              alphabetField('Mother Tongue', motherTongueController),
             ],
           ),
         ),
@@ -326,11 +325,16 @@ class _addStudentState extends State<addStudent> {
               numericField('Student Phone 1', sPhone1Controller),
               numericField('Student Phone 2', sPhone2Controller),
               numericField('Parent Phone', pPhoneController),
-              emailField("Student's Email",sEmailController),
+              emailField("Student's Email", sEmailController),
               Container(
-                margin: const EdgeInsets.only(top: 5,bottom: 5),
+                margin: const EdgeInsets.only(top: 5, bottom: 5),
                 child: TextFormField(
-                  validator: emptyFieldValidator,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "*Required";
+                    }
+                    return null;
+                  },
                   controller: addressController,
                   minLines: 3,
                   maxLines: 5,
@@ -348,9 +352,9 @@ class _addStudentState extends State<addStudent> {
           title: const Text("EDUCATION DETAILS"),
           content: Column(
             children: [
-              alphabetField('Qualification',qualificationController),
-              alphabetField('School Or College Name',scNameController),
-              alphabetField('Class or Tuition Name',ctNameController),
+              alphabetField('Qualification', qualificationController),
+              alphabetField('School Or College Name', scNameController),
+              alphabetField('Class or Tuition Name', ctNameController),
             ],
           ),
         ),
@@ -365,13 +369,16 @@ class _addStudentState extends State<addStudent> {
         ),
       ];
 
+  Container emailField(String text, TextEditingController controller) {
+    return Container(
+      margin: const EdgeInsets.only(top: 5, bottom: 5),
+      child: TextFormField(
+        controller: controller,
+        validator: emailValidator,
+        decoration: InputDecoration(label: Text(text), border: roundBorder()),
+      ),
+    );
+  }
 
-
-
-
-  // All the field related to Numbers
-
-
-
-
+// All the field related to Numbers
 }

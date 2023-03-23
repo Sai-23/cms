@@ -20,7 +20,7 @@ String? alphabetValidator(String? fieldContent) {
   //<-- add String? as a return type
   if (fieldContent == null || fieldContent.isEmpty) {
     return '*Required';
-  } else if (!RegExp(r'^[a-zA-Z]+$').hasMatch(fieldContent)) {
+  } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(fieldContent)) {
     return "Only Alphabets Allowed";
   }
   return null;
