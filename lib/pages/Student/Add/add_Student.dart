@@ -250,7 +250,7 @@ class _addStudentState extends State<addStudent> {
                     decoration: InputDecoration(
                         border: roundBorder(),
                         prefixIcon: const Icon(Icons.calendar_month_rounded),
-                        labelText: "DOB"),
+                        labelText: "Date Of Birth"),
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(
                           context: context,
@@ -271,7 +271,8 @@ class _addStudentState extends State<addStudent> {
                   Expanded(
                       child: DropdownButtonFormField(
                         validator: emptyFieldValidator,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
+                          border: roundBorder(),
                           labelText: 'Select Gender'
                         ),
                     value: dropdownValue,
