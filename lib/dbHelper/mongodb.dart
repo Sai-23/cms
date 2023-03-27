@@ -1,8 +1,9 @@
 import 'package:mongo_dart/mongo_dart.dart';
 import '../pages/Student/Add/add_MongoDBModel.dart';
 import 'constant.dart';
-
+const baseUrl = 'https://smartbyte-cms-api.onrender.com/sdp';
 class MongoDatabase {
+
   static var db, userCollection;
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);

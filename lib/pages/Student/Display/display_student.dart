@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'package:cms/dbHelper/mongodb.dart';
 import 'package:cms/pages/Student/Add/add_MongoDBModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:http/http.dart';
+
 
 class DisplayStudent extends StatefulWidget {
   const DisplayStudent({Key? key}) : super(key: key);
@@ -12,10 +15,12 @@ class DisplayStudent extends StatefulWidget {
 }
 
 class _DisplayStudentState extends State<DisplayStudent> {
+
   @override
   Widget build(BuildContext context) {
     //                            TODO: DISPLAY FUNCTION
     return Scaffold(
+
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -74,32 +79,31 @@ class _DisplayStudentState extends State<DisplayStudent> {
             Column(
               children: [
                 IconButton(
-                  onPressed: (){
-                   // TODO:DELETE FUNCTION GOES HERE
-                    QuickAlert.show(
-                      context: context,
-                      type: QuickAlertType.confirm,
-                      animType: QuickAlertAnimType.slideInDown,
-                      title: "DELETE STUDENT",
-                      text: 'Are You Sure?',
-                      confirmBtnText: 'Delete',
-                      cancelBtnText: 'Cancel',
-                      confirmBtnColor: Colors.red,
-                      onConfirmBtnTap: ()async{
-                        await MongoDatabase.delete(data);
-                        Navigator.pop(context);
-                        setState(() {
-
-                        });
-                      }
-                    );
-
-
-                  },
-                  icon: const Icon(Icons.delete,color: Colors.red,),
-                ), IconButton(
                   onPressed: () {
-                   // TODO:UPDATE FUNCTION COMES HERE
+                    // TODO:DELETE FUNCTION GOES HERE
+                    QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.confirm,
+                        animType: QuickAlertAnimType.slideInDown,
+                        title: "DELETE STUDENT",
+                        text: 'Are You Sure?',
+                        confirmBtnText: 'Delete',
+                        cancelBtnText: 'Cancel',
+                        confirmBtnColor: Colors.red,
+                        onConfirmBtnTap: () async {
+                          await MongoDatabase.delete(data);
+                          Navigator.pop(context);
+                          setState(() {});
+                        });
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    // TODO:UPDATE FUNCTION COMES HERE
                   },
                   icon: const Icon(Icons.edit),
                 ),

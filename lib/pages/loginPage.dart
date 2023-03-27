@@ -1,7 +1,9 @@
 import 'package:cms/pages/Student/Add/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:cms/dbHelper/mongodb.dart';
 
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
@@ -15,6 +17,28 @@ class _loginPageState extends State<loginPage> {
   final loginFormKey = GlobalKey<FormState>();
   var loginEmail = TextEditingController();
   var loginPassword = TextEditingController();
+
+  void login(String email, password) async {
+    final navigator = Navigator.of(context);
+    try {
+      Response response = await post(
+          Uri.parse('$baseUrl/auth/login'),
+          body: {'email': email, 'password': password});
+      if (response.statusCode == 200) {
+        navigator.pushReplacementNamed('/mainPage');
+      } else {
+        QuickAlert.show(
+          context: context,
+          animType: QuickAlertAnimType.slideInUp,
+          type: QuickAlertType.error,
+          title: 'INVALID CREDENTIALS',
+          text: 'Enter Correct Credentials',
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,15 +103,14 @@ class _loginPageState extends State<loginPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 5.0),
                               child: TextFormField(
-                                controller: loginEmail,
-                                decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.mail),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    labelText: 'Email'),
-                                validator: emailValidator
-                              ),
+                                  controller: loginEmail,
+                                  decoration: InputDecoration(
+                                      prefixIcon: const Icon(Icons.mail),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      labelText: 'Email'),
+                                  validator: emailValidator),
                             ),
                           ),
                           const SizedBox(
@@ -133,22 +156,8 @@ class _loginPageState extends State<loginPage> {
 
                           GestureDetector(
                             onTap: () {
-                              final isValidForm =
-                                  loginFormKey.currentState!.validate();
-                              if (isValidForm) {
-                                if (loginEmail.text == "aaa@gmail.com" &&
-                                    loginPassword.text == "aaa123") {
-                                  Navigator.pushNamed(context, '/mainPage');
-                                } else {
-                                  QuickAlert.show(
-                                    context: context,
-                                    animType: QuickAlertAnimType.slideInUp,
-                                    type: QuickAlertType.error,
-                                    title: 'INVALID CREDENTIALS',
-                                    text: 'Enter Correct Credentials',
-                                  );
-                                }
-                              }
+                              login(loginEmail.text.toString(),
+                                  loginPassword.text.toString());
                             },
                             child: Padding(
                               padding: const EdgeInsets.only(
