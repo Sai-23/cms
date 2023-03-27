@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/mainPage': (context) => const mainPage(),
         '/addStudent': (context) => const addStudent(),
         '/displayStudent':(context)=>const DisplayStudent()
-      },
+      }
     );
   }
 }
