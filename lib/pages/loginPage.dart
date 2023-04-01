@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:cms/pages/Student/Add/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
-import 'package:quickalert/quickalert.dart';
 import 'package:cms/dbHelper/mongodb.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
@@ -20,20 +22,16 @@ class _loginPageState extends State<loginPage> {
 
   void login(String email, password) async {
     final navigator = Navigator.of(context);
+    EasyLoading.show(status: "Authenticating");
     try {
-      Response response = await post(
-          Uri.parse('$baseUrl/auth/login'),
+      Response response = await post(Uri.parse('$baseUrl/auth/login'),
           body: {'email': email, 'password': password});
       if (response.statusCode == 200) {
+        EasyLoading.showSuccess("Login Successfull");
         navigator.pushReplacementNamed('/mainPage');
+        EasyLoading.dismiss();
       } else {
-        QuickAlert.show(
-          context: context,
-          animType: QuickAlertAnimType.slideInUp,
-          type: QuickAlertType.error,
-          title: 'INVALID CREDENTIALS',
-          text: 'Enter Correct Credentials',
-        );
+        EasyLoading.showError("Invalid Details");
       }
     } catch (e) {
       print(e);
